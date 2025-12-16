@@ -75,21 +75,35 @@ async function init() {
   const { projectName, author } = result;
   const finalTargetDir = path.resolve(process.cwd(), targetDir || projectName);
 
-  if (fs.existsSync(finalTargetDir)) {
-    const { replace } = await prompts({
-      type: 'confirm',
-      name: 'replace',
-      message: red(
-        `Target directory "${targetDir}" is not empty. Remove existing files and continue?`,
-      ),
-      initial: false,
+  if (fs.existsSync(finalTargetDir) && fs.readdirSync(finalTargetDir).length > 0) {
+    const { action } = await prompts({
+      type: 'select',
+      name: 'action',
+      message: red(`Target directory "${targetDir}" is not empty. How to proceed?`),
+      choices: [
+        { title: 'Cancel', value: 'cancel' },
+        {
+          title: 'Overwrite',
+          description: 'Keep existing files and overwrite if conflicts',
+          value: 'overwrite',
+        },
+        {
+          title: 'Remove all files',
+          description: 'Delete everything in the directory',
+          value: 'empty',
+        },
+      ],
+      initial: 0,
     });
 
-    if (!replace) {
+    if (action === 'cancel' || !action) {
       console.log(red('✖') + ' Operation cancelled');
       return;
     }
-    await fs.emptyDir(finalTargetDir);
+
+    if (action === 'empty') {
+      await fs.emptyDir(finalTargetDir);
+    }
   }
 
   console.log(`\nScaffolding project in ${finalTargetDir}...`);
