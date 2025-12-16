@@ -2,6 +2,28 @@
 
 Professional, production-ready Electron application template featuring a modern tech stack and best practices.
 
+## Usage
+
+This is a CLI tool to bootstrap a new Electron application.
+
+### Scaffold a new project
+
+Use `npx` (recommended) to create a new project in seconds:
+
+```bash
+npx @khanhromvn/create-electron-app
+```
+
+Then follow the interactive prompts to set up your project name.
+
+After scaffolding:
+
+```bash
+cd <your-project-name>
+npm install
+npm run dev
+```
+
 ## Features
 
 - 🏗 **Architecture**: Feature-based folder structure for scalability.
@@ -32,7 +54,9 @@ src/
     │   └── main.tsx    # Entry point
 ```
 
-## Getting Started
+## Development (Contributing)
+
+If you want to contribute to this template or run it locally as a standalone app:
 
 ### Prerequisites
 
@@ -54,11 +78,11 @@ npm run dev
 
 ## Scripts
 
-- \`npm run dev\`: Start development server.
-- \`npm run build\`: Build for production.
-- \`npm test\`: Run tests.
-- \`npm run lint\`: Lint code.
-- \`npm run format\`: Format code.
+- `npm run dev`: Start development server.
+- `npm run build`: Build for production.
+- `npm test`: Run tests.
+- `npm run lint`: Lint code.
+- `npm run format`: Format code.
 
 ## Documentation
 
