@@ -1,9 +1,23 @@
 {
-  "name": "template-electron-app",
+  "name": "@khanhromvn/create-electron-app",
   "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Professional Electron Template",
+  "bin": {
+    "create-electron-app": "bin/index.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "resources",
+    "out",
+    "package.json",
+    "electron.vite.config.ts"
+  ],
   "main": "./out/main/index.js",
-  "author": "Your Name",
+  "author": "KhanhRomVN",
   "scripts": {
     "dev": "electron-vite dev",
     "build": "npm run typecheck && electron-vite build",
@@ -32,7 +46,10 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "electron-updater": "^6.1.7",
+    "fs-extra": "^11.3.2",
+    "kolorist": "^1.8.0",
     "lucide-react": "^0.294.0",
+    "prompts": "^2.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",
