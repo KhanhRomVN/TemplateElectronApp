@@ -14,6 +14,38 @@ async function init() {
   let result = {};
 
   try {
+    if (!targetDir) {
+      const { strategy } = await prompts(
+        {
+          type: 'select',
+          name: 'strategy',
+          message: reset('Where should we create the project?'),
+          choices: [
+            {
+              title: 'New Directory',
+              description: 'Create a new folder for the project',
+              value: 'new',
+            },
+            {
+              title: 'Current Directory',
+              description: 'Use the folder you are currently in',
+              value: 'current',
+            },
+          ],
+          initial: 0,
+        },
+        {
+          onCancel: () => {
+            throw new Error(red('✖') + ' Operation cancelled');
+          },
+        },
+      );
+
+      if (strategy === 'current') {
+        targetDir = '.';
+      }
+    }
+
     result = await prompts(
       [
         {
@@ -21,9 +53,6 @@ async function init() {
           name: 'projectName',
           message: reset('Project name:'),
           initial: 'electron-app',
-          onState: (state) => {
-            targetDir = targetDir || state.value.trim() || 'electron-app';
-          },
         },
         {
           type: 'text',
