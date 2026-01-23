@@ -22,7 +22,7 @@
     "dev": "electron-vite dev",
     "build": "npm run typecheck && electron-vite build",
     "preview": "electron-vite preview",
-    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "typecheck": "tsc --noEmit",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "lint": "eslint .",
@@ -89,10 +89,17 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write",
+      "npm run typecheck",
+      "bash -c 'njsscan . --exit-zero'"
     ],
     "*.{json,css,md}": [
       "prettier --write"
+    ],
+    "*": [
+      "bash -c 'ggshield secret scan pre-commit --exit-zero || true'",
+      "bash -c 'scripts/bin/gitleaks protect --staged -v'",
+      "bash -c 'scripts/bin/talisman --pattern staged'"
     ]
   }
 }
