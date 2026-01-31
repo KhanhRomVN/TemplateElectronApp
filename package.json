@@ -46,6 +46,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "electron-updater": "^6.1.7",
+    "framer-motion": "^12.29.2",
     "fs-extra": "^11.3.2",
     "kolorist": "^1.8.0",
     "lucide-react": "^0.294.0",
@@ -90,8 +91,8 @@
     "*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write",
-      "npm run typecheck",
-      "bash -c 'njsscan . --exit-zero'"
+      "bash -c 'npm run typecheck'",
+      "bash -c 'njsscan . || true'"
     ],
     "*.{json,css,md}": [
       "prettier --write"
